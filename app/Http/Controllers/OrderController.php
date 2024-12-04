@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OrderStatusUpdated;
 use App\Models\Order;
 use Illuminate\Http\Request;
 
@@ -10,6 +11,20 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function updateStatus(Request $request, $id)
+    {
+        $order = Order::findOrFail($id);
+        $order->status = $request->status;
+        $order->save();
+
+        $message = "Your order status has been updated to: {$order->status}.";
+
+        // Trigger event
+        event(new OrderStatusUpdated($order, $message));
+
+        return response()->json(['message' => 'Order status updated and notification sent.']);
+    }
+
     public function index()
     {
         //

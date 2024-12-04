@@ -10,9 +10,11 @@ class CheckoutController extends Controller
 {
     public function process(Request $request)
     {
-        // Konfigurasi Midtrans
-        Config::$serverKey = config('midtrans.serverKey');
-        Config::$isProduction = config('midtrans.isProduction');
+//         // Konfigurasi Midtrans
+//         MIDTRANS_SERVER_KEY=SB-Mid-server-6eNrxj9IdNrcbxJwQY0qPkJr
+// MIDTRANS_CLIENT_KEY=SB-Mid-client-91QoM020Y5KSHCXb
+        Config::$serverKey = 'SB-Mid-server-6eNrxj9IdNrcbxJwQY0qPkJr';
+        Config::$isProduction = false;
         Config::$isSanitized = true;
         Config::$is3ds = true;
 
